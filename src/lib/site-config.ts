@@ -1,4 +1,5 @@
-import type { SiteConfig } from "@/types/site";
+import type { SiteConfig } from "@/types/site"
+import { siteUrl } from "@/lib/site-url"
 
 /**
  * Temporary source of truth for `/freelance` availability messaging.
@@ -6,7 +7,7 @@ import type { SiteConfig } from "@/types/site";
  * Only the exact string `"true"` means available.
  */
 export function isFreelanceAvailable(): boolean {
-	return process.env.NEXT_PUBLIC_FREELANCE_AVAILABLE === "true";
+  return process.env.NEXT_PUBLIC_FREELANCE_AVAILABLE === "true"
 }
 
 /**
@@ -15,29 +16,29 @@ export function isFreelanceAvailable(): boolean {
  * `freelance.available` is derived from NEXT_PUBLIC_FREELANCE_AVAILABLE.
  */
 export const siteConfig: SiteConfig = {
-	name: "Jay Shrivastava",
-	url: "https://jay-shrivastava-dev.vercel.app/",
-	contact: {
-		email: "jay.shrivastava3126@gmail.com",
-	},
-	social: {
-		linkedin: "https://www.linkedin.com/in/jays-se/",
-		github: "https://github.com/jays-se",
-		leetcode: null,
-	},
-	companies: {
-		intellicar: {
-			name: "Intellicar Telematics Pvt Ltd",
-			linkedin: "https://www.linkedin.com/company/intellicar/",
-		},
-		surya: {
-			name: "Surya Financial Technologies Pvt Ltd",
-			linkedin: "https://www.linkedin.com/company/suryafintech/",
-		},
-	},
-	freelance: {
-		get available() {
-			return isFreelanceAvailable();
-		},
-	},
-};
+  name: "Jay Shrivastava",
+  url: siteUrl,
+  contact: {
+    email: "jay.shrivastava3126@gmail.com",
+  },
+  social: {
+    linkedin: "https://www.linkedin.com/in/jays-se/",
+    github: "https://github.com/jays-se",
+    leetcode: null,
+  },
+  companies: {
+    intellicar: {
+      name: "Intellicar Telematics Pvt Ltd",
+      linkedin: "https://www.linkedin.com/company/intellicar/",
+    },
+    surya: {
+      name: "Surya Financial Technologies Pvt Ltd",
+      linkedin: "https://www.linkedin.com/company/suryafintech/",
+    },
+  },
+  freelance: {
+    get available() {
+      return isFreelanceAvailable()
+    },
+  },
+}

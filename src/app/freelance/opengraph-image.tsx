@@ -74,7 +74,7 @@ export default function FreelanceOpenGraphImage() {
           }}
         >
           <span>Jay Shrivastava</span>
-          <span style={{ color: "#1f4b7a" }}>jay-shrivastava-dev.app/freelance</span>
+          <span style={{ color: "#1f4b7a" }}>jay-shrivastava-dev.vercel.app/freelance</span>
         </div>
       </div>
     ),

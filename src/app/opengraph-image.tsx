@@ -74,7 +74,7 @@ export default function OpenGraphImage() {
           }}
         >
           <span>React · TypeScript · Web Applications</span>
-          <span style={{ color: "#1f4b7a" }}>jay-shrivastava-dev.app</span>
+          <span style={{ color: "#1f4b7a" }}>jay-shrivastava-dev.vercel.app</span>
         </div>
       </div>
     ),
