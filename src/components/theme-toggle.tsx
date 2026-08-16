@@ -1,15 +1,13 @@
 "use client"
 
-import { useSyncExternalStore } from "react"
-import { Monitor, Moon, Sun } from "lucide-react"
+import { useEffect, useSyncExternalStore } from "react"
+import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
 import { Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
 
-const modes = ["light", "dark", "system"] as const
-
-type ThemeMode = (typeof modes)[number]
+type ThemeMode = "light" | "dark"
 
 const labels: Record<
   ThemeMode,
@@ -21,13 +19,8 @@ const labels: Record<
     next: "dark",
   },
   dark: {
-    aria: "Theme: Dark. Switch to system theme",
-    title: "Dark — click for System",
-    next: "system",
-  },
-  system: {
-    aria: "Theme: System. Switch to light theme",
-    title: "System — click for Light",
+    aria: "Theme: Dark. Switch to light theme",
+    title: "Dark — click for Light",
     next: "light",
   },
 }
@@ -50,17 +43,20 @@ type ThemeToggleProps = {
 }
 
 export function ThemeToggle({ className, showLabel = false }: ThemeToggleProps) {
-  const { theme, setTheme } = useTheme()
+  const { theme, resolvedTheme, setTheme } = useTheme()
   const mounted = useSyncExternalStore(
     subscribe,
     getClientSnapshot,
     getServerSnapshot
   )
 
-  const current: ThemeMode = modes.includes(theme as ThemeMode)
-    ? (theme as ThemeMode)
-    : "system"
+  useEffect(() => {
+    if (theme === "system") {
+      setTheme(resolvedTheme === "dark" ? "dark" : "light")
+    }
+  }, [theme, resolvedTheme, setTheme])
 
+  const current: ThemeMode = resolvedTheme === "dark" ? "dark" : "light"
   const meta = labels[current]
 
   if (!mounted) {
@@ -97,16 +93,10 @@ export function ThemeToggle({ className, showLabel = false }: ThemeToggleProps) 
     >
       {current === "light" ? (
         <Sun className="size-4" />
-      ) : current === "dark" ? (
-        <Moon className="size-4" />
       ) : (
-        <Monitor className="size-4" />
+        <Moon className="size-4" />
       )}
-      {showLabel ? (
-        <span className="capitalize">
-          {current === "system" ? "System" : current}
-        </span>
-      ) : null}
+      {showLabel ? <span className="capitalize">{current}</span> : null}
     </Button>
   )
 }

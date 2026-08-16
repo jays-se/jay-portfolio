@@ -6,7 +6,7 @@ export const professional: ModePresentation = {
   meta: {
     title: "Jay Shrivastava — Software Engineer",
     description:
-      "Software engineer building production-ready web applications with React, TypeScript, and a focus on architecture and complex data-driven experiences.",
+      "Software engineer building production-ready web applications with React, TypeScript and modern web technologies.",
   },
   nav: [
     { label: "About", href: "#about" },

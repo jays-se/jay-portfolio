@@ -3,7 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google"
 
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { ThemeProvider } from "@/components/theme-provider"
-import { professional } from "@/data/presentation"
+import { absoluteUrl, seo, siteUrl } from "@/lib/seo"
 import { siteConfig } from "@/lib/site-config"
 
 import "./globals.css"
@@ -27,24 +27,34 @@ const ibmPlexMono = IBM_Plex_Mono({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: {
-    default: professional.meta.title,
+    default: seo.home.title,
     template: `%s · ${siteConfig.name}`,
   },
-  description: professional.meta.description,
-  metadataBase: new URL(siteConfig.url),
+  description: seo.home.description,
+  applicationName: siteConfig.name,
+  authors: [{ name: siteConfig.name, url: siteUrl }],
+  creator: siteConfig.name,
+  alternates: {
+    canonical: absoluteUrl("/"),
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: professional.meta.title,
-    description: professional.meta.description,
-    url: siteConfig.url,
-    siteName: siteConfig.name,
-    locale: "en_US",
     type: "website",
+    locale: "en_US",
+    url: absoluteUrl("/"),
+    siteName: siteConfig.name,
+    title: seo.home.title,
+    description: seo.home.ogDescription,
   },
   twitter: {
     card: "summary_large_image",
-    title: professional.meta.title,
-    description: professional.meta.description,
+    title: seo.home.title,
+    description: seo.home.ogDescription,
   },
 }
 
@@ -59,8 +69,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <body className="flex min-h-full flex-col font-sans">
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem
+          defaultTheme="light"
+          enableSystem={false}
           disableTransitionOnChange
           storageKey="jay-portfolio-theme"
         >

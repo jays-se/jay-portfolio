@@ -7,15 +7,31 @@ import { FreelanceHero } from "@/features/freelance/freelance-hero"
 import { FreelanceServices } from "@/features/freelance/services"
 import { SelectedWork } from "@/features/freelance/selected-work"
 import { WhyWorkWithMe } from "@/features/freelance/why-work-with-me"
+import { absoluteUrl, seo } from "@/lib/seo"
 
 export const metadata: Metadata = {
-  title: "End-to-End Web Development — Jay Shrivastava",
-  description:
-    "Production-ready websites and web applications built from requirements through deployment.",
+  title: {
+    absolute: seo.freelance.title,
+  },
+  description: seo.freelance.description,
+  alternates: {
+    canonical: absoluteUrl("/freelance"),
+  },
+  robots: {
+    index: true,
+    follow: true,
+  },
   openGraph: {
-    title: "End-to-End Web Development — Jay Shrivastava",
-    description:
-      "Production-ready websites and web applications built from requirements through deployment.",
+    type: "website",
+    locale: "en_US",
+    url: absoluteUrl("/freelance"),
+    title: seo.freelance.title,
+    description: seo.freelance.ogDescription,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: seo.freelance.title,
+    description: seo.freelance.ogDescription,
   },
 }
 
