@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useSyncExternalStore } from "react"
+import { useEffect, useState, useSyncExternalStore } from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
 
@@ -44,6 +44,7 @@ type ThemeToggleProps = {
 
 export function ThemeToggle({ className, showLabel = false }: ThemeToggleProps) {
   const { theme, resolvedTheme, setTheme } = useTheme()
+  const [iconAnim, setIconAnim] = useState<"to-light" | "to-dark" | null>(null)
   const mounted = useSyncExternalStore(
     subscribe,
     getClientSnapshot,
@@ -89,13 +90,26 @@ export function ThemeToggle({ className, showLabel = false }: ThemeToggleProps) 
       )}
       aria-label={meta.aria}
       title={meta.title}
-      onClick={() => setTheme(meta.next)}
+      onClick={() => {
+        setIconAnim(meta.next === "dark" ? "to-dark" : "to-light")
+        setTheme(meta.next)
+      }}
     >
-      {current === "light" ? (
-        <Sun className="size-4" />
-      ) : (
-        <Moon className="size-4" />
-      )}
+      <span
+        key={current}
+        className={cn(
+          "theme-toggle-icon inline-flex",
+          iconAnim === "to-dark" && "theme-toggle-icon-to-dark",
+          iconAnim === "to-light" && "theme-toggle-icon-to-light"
+        )}
+        aria-hidden
+      >
+        {current === "light" ? (
+          <Sun className="size-4" />
+        ) : (
+          <Moon className="size-4" />
+        )}
+      </span>
       {showLabel ? <span className="capitalize">{current}</span> : null}
     </Button>
   )
