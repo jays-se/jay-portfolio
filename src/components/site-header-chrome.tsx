@@ -24,7 +24,6 @@ export function SiteHeaderChrome({ children, className }: SiteHeaderChromeProps)
     <header
       className={cn(
         "sticky top-0 z-50 border-b transition-[background-color,border-color] duration-200",
-        "relative",
         scrolled
           ? "border-border bg-background/95 backdrop-blur-md dark:bg-card/95"
           : "border-border/80 bg-background/90 backdrop-blur-md dark:bg-card dark:backdrop-blur-none",
