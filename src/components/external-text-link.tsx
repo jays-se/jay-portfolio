@@ -1,6 +1,12 @@
+"use client"
+
 import type { ReactNode } from "react"
 import { ExternalLink } from "lucide-react"
 
+import {
+  trackEvent,
+  type AnalyticsEventName,
+} from "@/lib/analytics"
 import { cn } from "@/lib/utils"
 
 type ExternalTextLinkProps = {
@@ -9,6 +15,9 @@ type ExternalTextLinkProps = {
   "aria-label": string
   className?: string
   showIcon?: boolean
+  /** Optional conversion event — no PII should be attached */
+  analyticsEvent?: AnalyticsEventName
+  analyticsProps?: Record<string, string | number | boolean | null>
 }
 
 export function ExternalTextLink({
@@ -17,6 +26,8 @@ export function ExternalTextLink({
   "aria-label": ariaLabel,
   className,
   showIcon = true,
+  analyticsEvent,
+  analyticsProps,
 }: ExternalTextLinkProps) {
   return (
     <a
@@ -28,6 +39,11 @@ export function ExternalTextLink({
         "group/link inline-flex items-center gap-1.5 rounded-sm transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50",
         className
       )}
+      onClick={
+        analyticsEvent
+          ? () => trackEvent(analyticsEvent, analyticsProps)
+          : undefined
+      }
     >
       <span>{children}</span>
       {showIcon ? (

@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react"
 import Link from "next/link"
 import { ArrowRight, Menu, X } from "lucide-react"
 
+import { AnalyticsButton } from "@/components/analytics-button"
 import { AnchorNav } from "@/components/anchor-nav"
 import { Container } from "@/components/container"
 import { MobileNavPopover } from "@/components/mobile-nav-popover"
@@ -11,6 +12,7 @@ import { SiteHeaderChrome } from "@/components/site-header-chrome"
 import { ThemeToggle } from "@/components/theme-toggle"
 import { Button } from "@/components/ui/button"
 import { useActiveSection } from "@/hooks/use-active-section"
+import { analyticsEvents } from "@/lib/analytics"
 import { siteConfig } from "@/lib/site-config"
 
 const nav = [
@@ -49,15 +51,29 @@ export function FreelanceHeader() {
 
         <div className="flex items-center gap-2">
           <ThemeToggle className="hidden md:inline-flex" />
-          <Button
-            nativeButton={false}
-            render={<a href={available ? "#contact" : "#work"} />}
-            size="sm"
-            className="group/cta hidden gap-1.5 sm:inline-flex"
-          >
-            {available ? "Start a Project" : "View My Work"}
-            <ArrowRight className="cta-arrow size-3.5" />
-          </Button>
+          {available ? (
+            <AnalyticsButton
+              event={analyticsEvents.startProject}
+              eventProps={{ location: "freelance_header" }}
+              nativeButton={false}
+              render={<a href="#contact" />}
+              size="sm"
+              className="group/cta hidden gap-1.5 sm:inline-flex"
+            >
+              Start a Project
+              <ArrowRight className="cta-arrow size-3.5" />
+            </AnalyticsButton>
+          ) : (
+            <Button
+              nativeButton={false}
+              render={<a href="#work" />}
+              size="sm"
+              className="group/cta hidden gap-1.5 sm:inline-flex"
+            >
+              View My Work
+              <ArrowRight className="cta-arrow size-3.5" />
+            </Button>
+          )}
           <Button
             ref={triggerRef}
             variant="ghost"

@@ -2,8 +2,10 @@
 
 import { ArrowRight } from "lucide-react"
 
+import { AnalyticsButton } from "@/components/analytics-button"
 import { Container } from "@/components/container"
 import { Button } from "@/components/ui/button"
+import { analyticsEvents } from "@/lib/analytics"
 import { siteConfig } from "@/lib/site-config"
 import { cn } from "@/lib/utils"
 
@@ -35,7 +37,9 @@ export function FreelanceHero() {
           <div className="freelance-hero-item mt-8 flex flex-wrap items-center gap-3 sm:mt-10">
             {available ? (
               <>
-                <Button
+                <AnalyticsButton
+                  event={analyticsEvents.startProject}
+                  eventProps={{ location: "freelance_hero" }}
                   nativeButton={false}
                   render={<a href="#contact" />}
                   size="lg"
@@ -43,7 +47,7 @@ export function FreelanceHero() {
                 >
                   Start a Project
                   <ArrowRight className="cta-arrow size-4" />
-                </Button>
+                </AnalyticsButton>
                 <Button
                   nativeButton={false}
                   render={<a href="#work" />}

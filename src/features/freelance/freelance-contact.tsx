@@ -1,10 +1,13 @@
 import { ArrowRight } from "lucide-react"
 
+import { AnalyticsAnchor } from "@/components/analytics-anchor"
+import { AnalyticsButton } from "@/components/analytics-button"
 import { Container } from "@/components/container"
 import { ExternalTextLink } from "@/components/external-text-link"
 import { Section } from "@/components/section"
 import { Button } from "@/components/ui/button"
 import { Reveal } from "@/features/freelance/reveal"
+import { analyticsEvents } from "@/lib/analytics"
 import { siteConfig } from "@/lib/site-config"
 
 export function FreelanceContact() {
@@ -42,13 +45,15 @@ export function FreelanceContact() {
                   Email
                 </dt>
                 <dd className="mt-2">
-                  <a
+                  <AnalyticsAnchor
                     href={`mailto:${siteConfig.contact.email}`}
+                    event={analyticsEvents.emailClick}
+                    eventProps={{ location: "freelance_contact" }}
                     aria-label="Email Jay Shrivastava"
                     className="font-heading text-lg font-medium tracking-tight break-all text-foreground transition-colors hover:text-primary focus-visible:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring/50"
                   >
                     {siteConfig.contact.email}
-                  </a>
+                  </AnalyticsAnchor>
                 </dd>
               </div>
               <div>
@@ -60,6 +65,8 @@ export function FreelanceContact() {
                     href={siteConfig.social.linkedin}
                     aria-label="Jay Shrivastava on LinkedIn"
                     className="font-medium text-foreground"
+                    analyticsEvent={analyticsEvents.linkedinClick}
+                    analyticsProps={{ location: "freelance_contact" }}
                   >
                     LinkedIn
                   </ExternalTextLink>
@@ -67,6 +74,8 @@ export function FreelanceContact() {
                     href={siteConfig.social.github}
                     aria-label="Jay Shrivastava on GitHub"
                     className="font-medium text-foreground"
+                    analyticsEvent={analyticsEvents.githubClick}
+                    analyticsProps={{ location: "freelance_contact" }}
                   >
                     GitHub
                   </ExternalTextLink>
@@ -75,7 +84,9 @@ export function FreelanceContact() {
             </dl>
 
             <div className="flex flex-col justify-end gap-3 sm:items-start">
-              <Button
+              <AnalyticsButton
+                event={analyticsEvents.startConversation}
+                eventProps={{ location: "freelance_contact" }}
                 nativeButton={false}
                 render={<a href={`mailto:${siteConfig.contact.email}`} />}
                 size="lg"
@@ -84,7 +95,7 @@ export function FreelanceContact() {
               >
                 Start a Conversation
                 <ArrowRight className="cta-arrow size-4" />
-              </Button>
+              </AnalyticsButton>
               <Button
                 nativeButton={false}
                 render={<a href="#work" />}

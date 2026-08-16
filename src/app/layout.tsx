@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import { IBM_Plex_Mono, IBM_Plex_Sans, Syne } from "next/font/google"
+import { Analytics } from "@vercel/analytics/next"
+import { SpeedInsights } from "@vercel/speed-insights/next"
 
 import { SmoothScroll } from "@/components/smooth-scroll"
 import { ThemeProvider } from "@/components/theme-provider"
@@ -76,6 +78,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         >
           <SmoothScroll />
           {children}
+          <Analytics />
+          <SpeedInsights />
         </ThemeProvider>
       </body>
     </html>
