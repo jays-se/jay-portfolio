@@ -1,8 +1,11 @@
 import { ArrowRight } from "lucide-react"
 
+import { AnalyticsButton } from "@/components/analytics-button"
 import { Container } from "@/components/container"
 import { Button } from "@/components/ui/button"
 import { professional } from "@/data/presentation"
+import { analyticsEvents } from "@/lib/analytics"
+import { siteConfig } from "@/lib/site-config"
 
 export function Hero() {
   const { hero } = professional
@@ -55,6 +58,26 @@ export function Hero() {
             >
               {hero.secondaryCta.label}
             </Button>
+            {hero.resumeCta ? (
+              <AnalyticsButton
+                event={analyticsEvents.resumeDownload}
+                eventProps={{ location: "hero" }}
+                nativeButton={false}
+                render={
+                  <a
+                    href={siteConfig.contact.resumeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  />
+                }
+                variant="outline"
+                size="lg"
+                className="h-11 px-5 text-sm"
+                aria-label="Download Jay Shrivastava’s resume (PDF)"
+              >
+                {hero.resumeCta.label}
+              </AnalyticsButton>
+            ) : null}
           </div>
         </div>
       </Container>

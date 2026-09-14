@@ -6,7 +6,7 @@ export const professional: ModePresentation = {
   meta: {
     title: "Jay Shrivastava — Software Engineer",
     description:
-      "Software engineer building production-ready web applications with React, TypeScript and modern web technologies.",
+      "Software engineer specializing in complex product UI, frontend architecture, state management, and data-heavy views with React, TypeScript, and modern web technologies.",
   },
   nav: [
     { label: "About", href: "#about" },
@@ -23,6 +23,7 @@ export const professional: ModePresentation = {
     focus: "React · TypeScript · Architecture · Design Systems · Performance",
     primaryCta: { label: "View Work", href: "#work" },
     secondaryCta: { label: "Contact Me", href: "#contact" },
+    resumeCta: { label: "Download Resume" },
   },
   work: {
     heading: "Selected engineering work",
@@ -30,6 +31,8 @@ export const professional: ModePresentation = {
       "Case studies from production systems — architecture, UI platforms, and data-intensive product surfaces. Details stay within what can be shared publicly.",
   },
   footerTagline: "Software Engineer · React · TypeScript · Next.js",
+  aboutThisSite:
+    "Built with Next.js, TypeScript, and Tailwind CSS — light/dark theme, with attention to SEO and accessibility.",
   headerCta: { label: "View Work", href: "#work" },
   showAvailabilityChip: false,
 }

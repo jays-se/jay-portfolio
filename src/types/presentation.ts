@@ -9,6 +9,8 @@ export type HeroPresentation = {
   focus?: string
   primaryCta: { label: string; href: string }
   secondaryCta: { label: string; href: string }
+  /** Resume download CTA — href resolved from siteConfig at render time */
+  resumeCta?: { label: string }
   availabilityNote?: string
 }
 
@@ -27,6 +29,8 @@ export type ModePresentation = {
   hero: HeroPresentation
   work: WorkPresentation
   footerTagline: string
+  /** Short note about this site’s stack and quality focus */
+  aboutThisSite?: string
   /** Header action button */
   headerCta: { label: string; href: string }
   showAvailabilityChip: boolean

@@ -35,6 +35,8 @@ export type WorkCaseStudy = {
   client?: string
   problem?: string
   solution?: string
+  /** Narrative outcome — pairs with numeric `outcomes` stats */
+  outcomeNarrative?: string
   architecture?: string
   keyFeatures?: string[]
   screenshots?: WorkScreenshot[]
@@ -50,6 +52,12 @@ export const work: WorkCaseStudy[] = [
     category: "Enterprise Operational Risk Platform",
     description:
       "An enterprise operational-risk platform where I worked on frontend architecture, scalable UI systems and data-heavy product workflows using React and TypeScript.",
+    problem:
+      "Legacy UI patterns made new operational-risk modules slow to ship. Shared surfaces were inconsistent, and page-load cost grew as data-heavy workflows expanded across the product.",
+    solution:
+      "I helped build a configuration-driven UI framework and an internal design system so modules compose from shared primitives, with GraphQL-backed data flows and clearer frontend architecture boundaries.",
+    outcomeNarrative:
+      "Teams delivered new modules with less one-off UI work, improved page-load performance on critical surfaces, and raised developer productivity through reusable patterns instead of bespoke screens.",
     highlights: [
       "Configuration-driven UI framework",
       "Internal component library and design system",
@@ -105,24 +113,5 @@ export const work: WorkCaseStudy[] = [
       "Product extension: Contributed to the mobile application for the same fleet-management platform using React Native and Expo.",
     prominence: "standard",
     status: "current",
-  },
-  {
-    id: "personal-portfolio",
-    index: "03",
-    title: "Personal Portfolio",
-    category: "Personal Product",
-    description:
-      "This portfolio itself is an evolving product focused on presenting engineering work and supporting selective freelance opportunities.",
-    highlights: [
-      "Next.js + TypeScript",
-      "Light/dark theme system",
-      "Responsive editorial UI",
-      "SEO and accessibility",
-      "Freelance availability mode",
-      "Planned content management and full-stack capabilities",
-    ],
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    prominence: "supporting",
-    status: "personal",
   },
 ]

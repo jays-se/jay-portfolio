@@ -60,7 +60,7 @@ export default function OpenGraphImage() {
               maxWidth: 860,
             }}
           >
-            Software engineer building production-ready web applications.
+            Software engineer specializing in complex product UI and data-heavy interfaces.
           </div>
         </div>
 

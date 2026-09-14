@@ -20,6 +20,8 @@ export const siteConfig: SiteConfig = {
   url: siteUrl,
   contact: {
     email: "jay.shrivastava3126@gmail.com",
+    resumeUrl:
+      "https://drive.google.com/uc?export=download&id=1ZeMuR-f6OV2ZZHTv88WnJAi7I-_X8_Ac",
   },
   social: {
     linkedin: "https://www.linkedin.com/in/jays-se/",

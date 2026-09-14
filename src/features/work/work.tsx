@@ -1,7 +1,7 @@
 import { Container } from "@/components/container"
 import { Section } from "@/components/section"
 import { professional } from "@/data/presentation"
-import { work, type WorkCaseStudy } from "@/data/work"
+import { work, type WorkCaseStudy, type WorkOutcome } from "@/data/work"
 import { cn } from "@/lib/utils"
 
 function statusLabel(status: WorkCaseStudy["status"]) {
@@ -17,10 +17,67 @@ function statusLabel(status: WorkCaseStudy["status"]) {
   }
 }
 
+function OutcomeStats({ outcomes }: { outcomes: WorkOutcome[] }) {
+  return (
+    <div>
+      <p className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+        Outcomes
+      </p>
+      <dl className="mt-4 grid grid-cols-1 gap-4 sm:grid-cols-2">
+        {outcomes.map((outcome) => (
+          <div
+            key={outcome.label}
+            className="rounded-lg border border-border bg-secondary/40 px-4 py-4 sm:px-5 sm:py-5"
+          >
+            <dt className="font-heading text-3xl font-semibold tracking-tight text-primary tabular-nums sm:text-4xl">
+              {outcome.value}
+            </dt>
+            <dd className="mt-2 text-sm leading-snug text-muted-foreground">
+              {outcome.label}
+            </dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  )
+}
+
+function CaseStudyNarrative({ project }: { project: WorkCaseStudy }) {
+  const blocks = [
+    project.problem
+      ? { title: "Challenge", body: project.problem }
+      : null,
+    project.solution
+      ? { title: "Solution", body: project.solution }
+      : null,
+    project.outcomeNarrative
+      ? { title: "Outcome", body: project.outcomeNarrative }
+      : null,
+  ].filter(Boolean) as { title: string; body: string }[]
+
+  if (blocks.length === 0) return null
+
+  return (
+    <div className="mt-8 max-w-3xl space-y-6 border-border border-t pt-8">
+      {blocks.map((block) => (
+        <div key={block.title}>
+          <h4 className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+            {block.title}
+          </h4>
+          <p className="mt-2 text-sm leading-relaxed text-foreground/85 sm:text-[0.9375rem]">
+            {block.body}
+          </p>
+        </div>
+      ))}
+    </div>
+  )
+}
+
 function CaseStudy({ project }: { project: WorkCaseStudy }) {
   const featured = project.prominence === "featured"
   const supporting = project.prominence === "supporting"
   const label = statusLabel(project.status)
+  const hasOutcomes = Boolean(project.outcomes?.length)
 
   return (
     <article
@@ -87,53 +144,40 @@ function CaseStudy({ project }: { project: WorkCaseStudy }) {
             </p>
           ) : null}
 
-          <div
-            className={cn(
-              "mt-8 grid gap-8",
-              featured && project.outcomes?.length
-                ? "lg:grid-cols-[minmax(0,1.4fr)_minmax(12rem,0.7fr)] lg:gap-12"
-                : null
-            )}
-          >
-            <div>
-              <h4 className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
-                Highlights
-              </h4>
-              <ul
-                className={cn(
-                  "mt-4 space-y-2.5",
-                  supporting ? "max-w-xl" : "max-w-2xl"
-                )}
-              >
-                {project.highlights.map((item) => (
-                  <li
-                    key={item}
-                    className="relative pl-4 text-sm leading-relaxed text-foreground/85 before:absolute before:top-[0.55em] before:left-0 before:size-1 before:rounded-full before:bg-primary/70 sm:text-[0.9375rem]"
-                  >
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
+          {featured ? <CaseStudyNarrative project={project} /> : null}
 
-            {project.outcomes && project.outcomes.length > 0 ? (
-              <dl className="space-y-5 border-border border-t pt-6 lg:border-t-0 lg:border-l lg:pt-0 lg:pl-8">
-                <div className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
-                  Outcomes
-                </div>
-                {project.outcomes.map((outcome) => (
-                  <div key={outcome.label}>
-                    <dt className="font-heading text-3xl font-semibold tracking-tight text-primary tabular-nums sm:text-4xl">
-                      {outcome.value}
-                    </dt>
-                    <dd className="mt-1 max-w-[16rem] text-sm leading-snug text-muted-foreground">
-                      {outcome.label}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            ) : null}
+          {featured && hasOutcomes ? (
+            <div className="mt-8">
+              <OutcomeStats outcomes={project.outcomes!} />
+            </div>
+          ) : null}
+
+          <div className={cn("mt-8", supporting && "mt-6")}>
+            <h4 className="font-mono text-xs tracking-[0.18em] text-muted-foreground uppercase">
+              Highlights
+            </h4>
+            <ul
+              className={cn(
+                "mt-4 space-y-2.5",
+                supporting ? "max-w-xl" : "max-w-2xl"
+              )}
+            >
+              {project.highlights.map((item) => (
+                <li
+                  key={item}
+                  className="relative pl-4 text-sm leading-relaxed text-foreground/85 before:absolute before:top-[0.55em] before:left-0 before:size-1 before:rounded-full before:bg-primary/70 sm:text-[0.9375rem]"
+                >
+                  {item}
+                </li>
+              ))}
+            </ul>
           </div>
+
+          {!featured && hasOutcomes ? (
+            <div className="mt-8">
+              <OutcomeStats outcomes={project.outcomes!} />
+            </div>
+          ) : null}
 
           <div
             className={cn(

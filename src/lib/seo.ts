@@ -11,9 +11,22 @@ export const seo = {
   home: {
     title: "Jay Shrivastava — Software Engineer",
     description:
-      "Software engineer building production-ready web applications with React, TypeScript and modern web technologies.",
+      "Software engineer specializing in complex product UI, frontend architecture, state management, and data-heavy views with React, TypeScript, and modern web technologies.",
     ogDescription:
-      "Software engineer building production-ready web applications.",
+      "Complex product UI, architecture, and data-heavy interfaces — React, TypeScript, design systems.",
+    keywords: [
+      "Jay Shrivastava",
+      "Software Engineer",
+      "Frontend Engineer",
+      "React",
+      "TypeScript",
+      "Next.js",
+      "product UI",
+      "frontend architecture",
+      "state management",
+      "design systems",
+      "data-heavy interfaces",
+    ],
     path: "/",
   },
   freelance: {

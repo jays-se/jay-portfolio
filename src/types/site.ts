@@ -13,6 +13,8 @@ export type SiteConfig = {
   url: string
   contact: {
     email: string
+    /** Direct download URL for the resume PDF */
+    resumeUrl: string
   }
   social: {
     linkedin: string

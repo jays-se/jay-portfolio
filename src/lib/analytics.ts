@@ -10,6 +10,8 @@ export const analyticsEvents = {
   emailClick: "email_click",
   linkedinClick: "linkedin_click",
   githubClick: "github_click",
+  resumeDownload: "resume_download",
+  contactFormSubmit: "contact_form_submit",
 } as const
 
 export type AnalyticsEventName =

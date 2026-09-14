@@ -35,9 +35,16 @@ export const metadata: Metadata = {
     template: `%s · ${siteConfig.name}`,
   },
   description: seo.home.description,
+  keywords: [...seo.home.keywords],
   applicationName: siteConfig.name,
   authors: [{ name: siteConfig.name, url: siteUrl }],
   creator: siteConfig.name,
+  category: "technology",
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
   alternates: {
     canonical: absoluteUrl("/"),
   },
@@ -52,11 +59,20 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     title: seo.home.title,
     description: seo.home.ogDescription,
+    images: [
+      {
+        url: "/opengraph-image",
+        width: 1200,
+        height: 630,
+        alt: seo.home.title,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: seo.home.title,
     description: seo.home.ogDescription,
+    images: ["/opengraph-image"],
   },
 }
 
